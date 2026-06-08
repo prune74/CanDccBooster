@@ -25,14 +25,22 @@
 class CanDccBoosterCalibration
 {
 public:
+    struct CalibrationConfig
+    {
+        uint16_t sampleCount;
+        uint16_t currentMargin_mA;
+        float voltageFactor;
 
-    struct CalibrationConfig {
-        uint16_t sampleCount = 200;     // nombre d’échantillons
-        uint16_t currentMargin_mA = 2000; // marge au-dessus du courant à vide
-        float    voltageFactor = 0.70f; // seuil = tension * facteur
+        CalibrationConfig()
+            : sampleCount(200),
+              currentMargin_mA(2000),
+              voltageFactor(0.70f)
+        {
+        }
     };
 
-    enum class State : uint8_t {
+    enum class State : uint8_t
+    {
         IDLE = 0,
         MEASURE_CURRENT,
         MEASURE_VOLTAGE,
@@ -52,7 +60,8 @@ public:
         : hardware(hw),
           baseConfig(initialCfg),
           calConfig(calCfg)
-    {}
+    {
+    }
 
     /* ------------------------------------------------------------
      * start()
@@ -78,7 +87,8 @@ public:
      */
     void update()
     {
-        switch (state) {
+        switch (state)
+        {
 
         case State::MEASURE_CURRENT:
             collectCurrent();
@@ -99,7 +109,8 @@ public:
      * isFinished()
      * ------------------------------------------------------------
      */
-    bool isFinished() const {
+    bool isFinished() const
+    {
         return state == State::DONE;
     }
 
@@ -107,7 +118,8 @@ public:
      * getCalibratedConfig()
      * ------------------------------------------------------------
      */
-    const BoosterConfig &getCalibratedConfig() const {
+    const BoosterConfig &getCalibratedConfig() const
+    {
         return calibratedConfig;
     }
 
@@ -138,7 +150,8 @@ private:
         sumCurrent += current;
         samplesCurrent++;
 
-        if (samplesCurrent >= calConfig.sampleCount) {
+        if (samplesCurrent >= calConfig.sampleCount)
+        {
 
             uint16_t avg = sumCurrent / samplesCurrent;
 
@@ -160,7 +173,8 @@ private:
         sumVoltage += voltage;
         samplesVoltage++;
 
-        if (samplesVoltage >= calConfig.sampleCount) {
+        if (samplesVoltage >= calConfig.sampleCount)
+        {
 
             uint16_t avg = sumVoltage / samplesVoltage;
 

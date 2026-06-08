@@ -27,7 +27,6 @@
 class CanDccBooster
 {
 public:
-
     /*
      * Constructeur principal
      *
@@ -41,7 +40,8 @@ public:
           core(hardware, canInterface, config),
           calibration(hardware, config),
           railcom(hardware, config.railcom)
-    {}
+    {
+    }
 
     /* ------------------------------------------------------------
      * update()
@@ -52,10 +52,12 @@ public:
     void update()
     {
         // Si calibration en cours → priorité
-        if (calibrationRunning) {
+        if (calibrationRunning)
+        {
             calibration.update();
 
-            if (calibration.isFinished()) {
+            if (calibration.isFinished())
+            {
                 // On récupère la config calibrée
                 config = calibration.getCalibratedConfig();
                 core.setConfig(config);
@@ -125,9 +127,10 @@ public:
 
         uint16_t addr = railcom.onCutoutEnd();
 
-        if (addr != BoosterConstants::RAILCOM_NO_ADDRESS) {
+        if (addr != BoosterConstants::RAILCOM_NO_ADDRESS)
+        {
             // On met l’adresse dans la télémétrie
-            BoosterTelemetry &t = const_cast<BoosterTelemetry&>(core.getTelemetry());
+            BoosterTelemetry &t = const_cast<BoosterTelemetry &>(core.getTelemetry());
             t.railcomAddress = addr;
         }
 
@@ -158,11 +161,11 @@ private:
     BoosterConfig config;
 
     CanDccBoosterHardware &hardware;
-    CanDccBoosterCAN       canInterface;
-    CanDccBoosterCore      core;
+    CanDccBoosterCAN canInterface;
+    CanDccBoosterCore core;
     CanDccBoosterCalibration calibration;
-    CanDccBoosterRailCom   railcom;
+    CanDccBoosterRailCom railcom;
 
     bool calibrationRunning = false;
-    bool calibrationDone    = false;
+    bool calibrationDone = false;
 };

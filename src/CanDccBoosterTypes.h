@@ -17,6 +17,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "CanDccBoosterConfig.h"
 
 /* ============================================================
  * États possibles du booster
@@ -91,6 +92,7 @@ struct BoosterConfig {
     uint16_t minVoltage_mV = 10000;  // seuil de sous-tension
     bool railcomEnabled = true;      // RailCom obligatoire dans Discovery 2026
     bool telemetryEnabled = true;    // envoi télémétrie CAN
+    RailComConfig railcom;
 };
 
 /* ============================================================

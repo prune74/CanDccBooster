@@ -1,0 +1,10 @@
+{
+  "name": "CanDccBooster",
+  "version": "1.0.0",
+  "author": "Bruno",
+  "description": "Bibliothèque Discovery 2026 pour booster DRV8874 avec RailCom HF.",
+  "keywords": ["CAN", "DCC", "Booster", "RailCom"],
+  "frameworks": ["arduino"],
+  "platforms": ["espressif32"],
+  "dependencies": []
+}

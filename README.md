@@ -11,4 +11,3 @@ Bibliothèque Discovery 2026 pour booster DRV8874 avec RailCom HF.
 
 ## Exemple
 Voir `examples/BoosterDemo/BoosterDemo.ino`.
-# CanDccBooster
